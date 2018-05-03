@@ -19,7 +19,7 @@ class CustomersController < ApplicationController
   end
 
   def show
-    @customer = Cusomer.find(params[:id])
+    @customer = Customer.find(params[:id])
   end
 
   def destroy
