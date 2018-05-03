@@ -8,14 +8,24 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(customer_params)
-    @customer.save
-   redirect_to @customer
+    if  @customer.save
+      redirect_to @customer
+    else
+      render :new
+    end
   end
 
   def edit
+    @customer = Customer.find(params[:id])
   end
 
   def update
+    @customer = Customer.find(params[:id])
+    if  @customer.update(customer_params)
+      redirect_to @customer
+    else
+      render :edit
+    end
   end
 
   def show
@@ -23,6 +33,9 @@ class CustomersController < ApplicationController
   end
 
   def destroy
+    @customer = Customer.find(params[:id])
+    @customer.destroy
+    redirect_to customers_path
   end
 
   private
